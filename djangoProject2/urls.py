@@ -16,12 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from frontend.views import news_list
+from frontend.views import news_list, news_one
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/news/', news_list),
-    path('api/v1/news/<pk:news_id>', news_one),
+    path('api/v1/news/<int:news_id>', news_one),
 ]
 '''
 /api/v1/news/   - GET return all news 
