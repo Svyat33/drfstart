@@ -17,10 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from frontend.views import news_list, news_one, NewsViewSet
+from frontend.views import news_list, news_one, NewsViewSet, CommentViewSet
 
 router = routers.DefaultRouter()
 router.register(r'news', NewsViewSet)
+router.register(r'comment', CommentViewSet)
 
 
 urlpatterns = [

@@ -6,9 +6,9 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets, permissions
 
 from frontend.forms import NewsForm
-from frontend.models import News
+from frontend.models import News, Comment
 from frontend.permissions import OnlyAdminCanModify
-from frontend.serializers import SmallNewsSerializer, DetailNewsSerializer
+from frontend.serializers import SmallNewsSerializer, DetailNewsSerializer, CommentsSerializer
 
 
 # Create your views here.
@@ -38,7 +38,10 @@ def news_one(request, news_id):
         n.delete()
         return JsonResponse(status=HTTPStatus.NO_CONTENT)
 
-
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentsSerializer
+    permission_classes = [OnlyAdminCanModify, ]
 
 class NewsViewSet(viewsets.ModelViewSet):
     queryset = News.objects.filter(approved=True).order_by('id')
